@@ -46,7 +46,7 @@ namespace AndroidCustomListView
 
 			view.FindViewById<ImageView>(Resource.Id.imgView).SetImageResource(character.pictureId);
 			view.FindViewById<TextView>(Resource.Id.textHeader).Text = character.name;
-			view.FindViewById<TextView>(Resource.Id.textSub).Text = character.age.ToString();
+			view.FindViewById<TextView>(Resource.Id.textSub).Text = "Age: "+character.age;
 
 			return view;
 		}

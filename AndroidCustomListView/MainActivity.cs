@@ -10,7 +10,9 @@ namespace AndroidCustomListView
 	public class MainActivity : Activity
 	{
 		
-		public List<Character> characters;
+		private List<Character> characters;
+		CustomListAdapter adapter;
+		ListView characterListView;
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
@@ -18,10 +20,21 @@ namespace AndroidCustomListView
 
 			// Set our view from the "main" layout resource
 			SetContentView(Resource.Layout.Main);
+			characterListView = FindViewById<ListView>(Resource.Id.listView);
 
 			characters = getCharacters();
+			adapter = new CustomListAdapter(this, characters);
 
+			characterListView.Adapter = adapter;
 
+			characterListView.ItemClick += CharacterListView_ItemClick;
+
+		}
+
+		void CharacterListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+		{
+			var selected = characters[e.Position];
+			Toast.MakeText(this, selected.ToString(), ToastLength.Short).Show();
 		}
 
 		private List<Character> getCharacters()
